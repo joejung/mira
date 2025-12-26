@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Cpu, Save, X } from "lucide-react";
+import { Save, X } from "lucide-react";
 import ChipsetSelector from "./ChipsetSelector";
 
 interface IssueFormProps {

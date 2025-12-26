@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -18,12 +18,10 @@ interface Issue {
 
 export default function IssuesPage() {
     const [issues, setIssues] = useState<Issue[]>([]);
-    const [loading, setLoading] = useState(true);
     const [showForm, setShowForm] = useState(false);
     const [selectedIssue, setSelectedIssue] = useState<Issue | null>(null);
 
     const fetchIssues = async () => {
-        setLoading(true);
         try {
             const response = await fetch('http://localhost:5000/api/issues');
             if (!response.ok) throw new Error('Failed to fetch issues');
@@ -32,7 +30,7 @@ export default function IssuesPage() {
         } catch (err) {
             console.error(err);
         } finally {
-            setLoading(false);
+            // Loading finished
         }
     };
 

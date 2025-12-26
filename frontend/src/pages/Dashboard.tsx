@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { 
     Activity, 
     AlertCircle, 
     CheckCircle2, 
-    Clock, 
     Cpu, 
-    TrendingUp, 
-    Users 
+    TrendingUp 
 } from "lucide-react";
 
 interface Issue {

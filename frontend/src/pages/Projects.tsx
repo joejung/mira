@@ -1,7 +1,8 @@
+
 import React, { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { LayoutGrid, Folder, MoreVertical, Plus, X } from "lucide-react";
+import { Folder, MoreVertical, Plus, X } from "lucide-react";
 import ProjectBoard from "@/components/ProjectBoard";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -16,7 +17,7 @@ interface Project {
 
 export default function ProjectsPage() {
     const [projects, setProjects] = useState<Project[]>([]);
-    const [loading, setLoading] = useState(true);
+    // const [loading, setLoading] = useState(true); // Loading unused in render, commented out to satisfy linter
     const [selectedProject, setSelectedProject] = useState<Project | null>(null);
     const [showNewProjectDialog, setShowNewProjectDialog] = useState(false);
     const [newProjectData, setNewProjectData] = useState({ name: "", key: "", description: "" });
@@ -50,8 +51,6 @@ export default function ProjectsPage() {
                 }
             } catch (err) {
                 console.error(err);
-            } finally {
-                setLoading(false);
             }
         };
         fetchProjects();

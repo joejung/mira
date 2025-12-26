@@ -26,8 +26,8 @@ export const SelectContent = ({ children, value, onValueChange }: any) => (
         {React.Children.map(children, (child) => {
             if (React.isValidElement(child)) {
                 return React.cloneElement(child as React.ReactElement<any>, {
-                    isSelected: child.props.value === value,
-                    onClick: () => onValueChange(child.props.value)
+                    isSelected: (child as React.ReactElement<any>).props.value === value,
+                    onClick: () => onValueChange((child as React.ReactElement<any>).props.value)
                 });
             }
             return child;
@@ -35,7 +35,7 @@ export const SelectContent = ({ children, value, onValueChange }: any) => (
     </div>
 );
 
-export const SelectItem = ({ children, value, onClick, isSelected }: any) => (
+export const SelectItem = ({ children, onClick, isSelected }: any) => (
     <div onClick={onClick} className={isSelected ? "bg-accent" : ""}>
         {children}
     </div>

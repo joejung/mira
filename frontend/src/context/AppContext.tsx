@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useState, ReactNode, useEffect } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
+
 
 interface AppContextType {
     activeTab: string;
@@ -9,6 +10,8 @@ interface AppContextType {
     token: string | null;
     login: (user: any, token: string) => void;
     logout: () => void;
+    showCreateIssue: boolean;
+    setShowCreateIssue: (show: boolean) => void;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -18,6 +21,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     const [selectedProject, setSelectedProject] = useState<any | null>(null);
     const [user, setUser] = useState<any | null>(null);
     const [token, setToken] = useState<string | null>(null);
+    const [showCreateIssue, setShowCreateIssue] = useState(false);
 
     useEffect(() => {
         const savedToken = localStorage.getItem('token');
@@ -51,7 +55,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
             user,
             token,
             login,
-            logout
+            logout,
+            showCreateIssue,
+            setShowCreateIssue
         }}>
             {children}
         </AppContext.Provider>
