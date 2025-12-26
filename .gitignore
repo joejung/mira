@@ -1,0 +1,51 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Build outputs
+dist/
+build/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# IDE/Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Vite
+*.local
+
+# TypeScript
+*.tsbuildinfo
+
+# Prisma
+prisma/migrations/*.db-journal
+
+# Database
+*.db
+*.db-journal
+*.sqlite
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Testing
+coverage/
+.vitest/
+
+# Misc
+*.bak
+*.tmp
