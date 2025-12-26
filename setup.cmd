@@ -6,9 +6,10 @@ echo     MIRA STARTUP - Environment Setup
 echo ===================================================
 echo.
 
-echo [1/5] Installing Backend Dependencies...
+echo [1/4] Installing Backend Dependencies (Python)...
 cd backend
-call npm install
+python -m venv venv
+call venv\Scripts\pip install -r requirements.txt
 if %errorlevel% neq 0 (
     echo [ERROR] Backend install failed.
     pause
@@ -17,7 +18,7 @@ if %errorlevel% neq 0 (
 echo [OK] Backend ready.
 echo.
 
-echo [2/5] Installing Frontend Dependencies...
+echo [2/4] Installing Frontend Dependencies...
 cd ../frontend
 call npm install
 if %errorlevel% neq 0 (
@@ -28,25 +29,9 @@ if %errorlevel% neq 0 (
 echo [OK] Frontend ready.
 echo.
 
-echo [3/5] Setting up Database (Prisma Generate)...
+echo [3/4] Seeding Database (Python)...
 cd ../backend
-call npx prisma generate
-if %errorlevel% neq 0 (
-    echo [ERROR] Prisma generate failed.
-    pause
-    exit /b %errorlevel%
-)
-
-echo [4/5] Running Migrations...
-call npx prisma migrate dev --name init_or_reset
-if %errorlevel% neq 0 (
-    echo [ERROR] Database migration failed.
-    pause
-    exit /b %errorlevel%
-)
-
-echo [5/5] Seeding Database (1000 Issues)...
-call npx prisma db seed
+call venv\Scripts\python seed.py
 if %errorlevel% neq 0 (
     echo [ERROR] Database seeding failed.
     pause
