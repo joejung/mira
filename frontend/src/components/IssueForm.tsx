@@ -8,15 +8,17 @@ import ChipsetSelector from "./ChipsetSelector";
 interface IssueFormProps {
     onClose: () => void;
     onSuccess: () => void;
+    initialProjectId?: number;
+    initialStatus?: string;
 }
 
-export default function IssueForm({ onClose, onSuccess }: IssueFormProps) {
+export default function IssueForm({ onClose, onSuccess, initialProjectId, initialStatus }: IssueFormProps) {
     const [formData, setFormData] = useState({
         title: "",
         description: "",
-        status: "OPEN",
+        status: initialStatus || "OPEN",
         priority: "MEDIUM",
-        projectId: 1, // Default project for now
+        projectId: initialProjectId || 1, // Default project for now
         reporterId: 1, // Default reporter for now
         chipsetVendor: "QUALCOMM" as "QUALCOMM" | "MEDIATEK" | "EXYNOS",
         chipset: "Snapdragon 8 Gen 3",

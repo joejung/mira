@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { LayoutGrid, Folder, MoreVertical, Plus } from "lucide-react";
+import ProjectBoard from "@/components/ProjectBoard";
 
 interface Project {
     id: number;
@@ -14,6 +15,7 @@ interface Project {
 export default function ProjectsPage() {
     const [projects, setProjects] = useState<Project[]>([]);
     const [loading, setLoading] = useState(true);
+    const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
     useEffect(() => {
         const fetchProjects = async () => {
@@ -32,6 +34,16 @@ export default function ProjectsPage() {
         fetchProjects();
     }, []);
 
+    if (selectedProject) {
+        return (
+            <ProjectBoard 
+                projectId={selectedProject.id} 
+                projectName={selectedProject.name}
+                onBack={() => setSelectedProject(null)}
+            />
+        );
+    }
+
     return (
         <div className="space-y-8 animate-in fade-in duration-500">
             <div className="flex items-center justify-between">
@@ -47,14 +59,18 @@ export default function ProjectsPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {projects.map((project) => (
-                    <Card key={project.id} className="border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-all group overflow-hidden bg-white/50 dark:bg-slate-900/50 backdrop-blur-md">
+                    <Card 
+                        key={project.id} 
+                        onClick={() => setSelectedProject(project)}
+                        className="border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-all group overflow-hidden bg-white/50 dark:bg-slate-900/50 backdrop-blur-md cursor-pointer active:scale-[0.98]"
+                    >
                         <div className="p-1 h-1 bg-indigo-500 opacity-0 group-hover:opacity-100 transition-opacity" />
                         <CardHeader className="pb-2">
                             <div className="flex items-start justify-between">
-                                <div className="w-10 h-10 rounded-lg bg-indigo-50 dark:bg-indigo-900/20 flex items-center justify-center text-indigo-600 border border-indigo-100 dark:border-indigo-900/30">
+                                <div className="w-10 h-10 rounded-lg bg-indigo-50 dark:bg-indigo-900/20 flex items-center justify-center text-indigo-600 border border-indigo-100 dark:border-indigo-900/30 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
                                     <Folder size={20} />
                                 </div>
-                                <Button variant="ghost" size="icon" className="text-slate-400">
+                                <Button variant="ghost" size="icon" className="text-slate-400" onClick={(e) => e.stopPropagation()}>
                                     <MoreVertical size={18} />
                                 </Button>
                             </div>

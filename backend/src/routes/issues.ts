@@ -63,4 +63,19 @@ router.get('/:id', async (req: Request, res: Response) => {
     }
 });
 
+// Update issue status
+router.patch('/:id/status', async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const { status } = req.body;
+    try {
+        const issue = await prisma.issue.update({
+            where: { id: parseInt(id) },
+            data: { status },
+        });
+        res.json(issue);
+    } catch (error: any) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 export default router;
