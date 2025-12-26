@@ -1,14 +1,11 @@
 import { PrismaClient } from '@prisma/client';
-import { PrismaBetterSqlite3 } from '@prisma/adapter-better-sqlite3';
-import BetterSqlite3 from 'better-sqlite3';
+import path from 'path';
 import bcrypt from 'bcryptjs';
 import dotenv from 'dotenv';
 
 dotenv.config();
 
-const db = new BetterSqlite3('prisma/dev.db');
-const adapter = new PrismaBetterSqlite3(db);
-const prisma = new PrismaClient({ adapter });
+const prisma = new PrismaClient();
 
 async function main() {
     const project = await prisma.project.upsert({
