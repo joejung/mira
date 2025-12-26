@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { LayoutGrid, Folder, MoreVertical, Plus } from "lucide-react";
+import { LayoutGrid, Folder, MoreVertical, Plus, X } from "lucide-react";
 import ProjectBoard from "@/components/ProjectBoard";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 interface Project {
     id: number;
@@ -16,6 +18,27 @@ export default function ProjectsPage() {
     const [projects, setProjects] = useState<Project[]>([]);
     const [loading, setLoading] = useState(true);
     const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+    const [showNewProjectDialog, setShowNewProjectDialog] = useState(false);
+    const [newProjectData, setNewProjectData] = useState({ name: "", key: "", description: "" });
+
+    const handleCreateProject = async (e: React.FormEvent) => {
+        e.preventDefault();
+        try {
+            const response = await fetch('http://localhost:5000/api/projects', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(newProjectData)
+            });
+            if (response.ok) {
+                const project = await response.json();
+                setProjects([...projects, project]);
+                setShowNewProjectDialog(false);
+                setNewProjectData({ name: "", key: "", description: "" });
+            }
+        } catch (error) {
+            console.error('Error creating project:', error);
+        }
+    };
 
     useEffect(() => {
         const fetchProjects = async () => {
@@ -51,7 +74,10 @@ export default function ProjectsPage() {
                     <h1 className="text-3xl font-bold tracking-tight">Projects</h1>
                     <p className="text-slate-500 text-sm mt-1">Manage and organize your chipset development portfolios.</p>
                 </div>
-                <Button className="gap-2 bg-indigo-600 hover:bg-indigo-700 shadow-md shadow-indigo-200 dark:shadow-none transition-all hover:translate-y-[-1px]">
+                <Button 
+                    className="gap-2 bg-indigo-600 hover:bg-indigo-700 shadow-md shadow-indigo-200 dark:shadow-none transition-all hover:translate-y-[-1px]"
+                    onClick={() => setShowNewProjectDialog(true)}
+                >
                     <Plus size={18} />
                     <span>New Project</span>
                 </Button>
@@ -100,6 +126,54 @@ export default function ProjectsPage() {
                     </Card>
                 ))}
             </div>
+            {showNewProjectDialog && (
+                <div className="fixed inset-0 bg-slate-950/40 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+                    <Card className="w-full max-w-md border-slate-200 dark:border-slate-800 shadow-2xl bg-white dark:bg-slate-900 animate-in zoom-in-95 duration-200">
+                        <CardHeader className="border-b border-slate-100 dark:border-slate-800 flex flex-row items-center justify-between pb-4">
+                            <CardTitle className="text-xl font-bold">Create Project</CardTitle>
+                            <Button variant="ghost" size="icon" onClick={() => setShowNewProjectDialog(false)} className="rounded-full">
+                                <X size={20} />
+                            </Button>
+                        </CardHeader>
+                        <CardContent className="pt-6">
+                            <form onSubmit={handleCreateProject} className="space-y-4">
+                                <div className="space-y-2">
+                                    <Label className="text-xs font-bold uppercase text-slate-500">Project Name</Label>
+                                    <Input
+                                        placeholder="e.g. Athena Chipset"
+                                        value={newProjectData.name}
+                                        onChange={(e) => setNewProjectData({ ...newProjectData, name: e.target.value })}
+                                        required
+                                    />
+                                </div>
+                                <div className="space-y-2">
+                                    <Label className="text-xs font-bold uppercase text-slate-500">Project Key</Label>
+                                    <Input
+                                        placeholder="e.g. ATH"
+                                        className="font-mono uppercase"
+                                        maxLength={4}
+                                        value={newProjectData.key}
+                                        onChange={(e) => setNewProjectData({ ...newProjectData, key: e.target.value.toUpperCase() })}
+                                        required
+                                    />
+                                </div>
+                                <div className="space-y-2">
+                                    <Label className="text-xs font-bold uppercase text-slate-500">Description</Label>
+                                    <Input
+                                        placeholder="Brief description..."
+                                        value={newProjectData.description}
+                                        onChange={(e) => setNewProjectData({ ...newProjectData, description: e.target.value })}
+                                    />
+                                </div>
+                                <div className="flex justify-end gap-3 pt-4 border-t border-slate-100 dark:border-slate-800">
+                                    <Button type="button" variant="outline" onClick={() => setShowNewProjectDialog(false)}>Cancel</Button>
+                                    <Button type="submit" className="bg-indigo-600 hover:bg-indigo-700">Create Project</Button>
+                                </div>
+                            </form>
+                        </CardContent>
+                    </Card>
+                </div>
+            )}
         </div>
     );
 }
