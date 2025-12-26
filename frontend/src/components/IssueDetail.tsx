@@ -7,10 +7,11 @@ import {
     User,
     Tag,
     Cpu,
-    MessageSquare,
     Paperclip,
-    ArrowRight
+    ArrowRight,
+    Save
 } from "lucide-react";
+import CommentSection from "./CommentSection";
 
 interface Issue {
     id: number;
@@ -21,7 +22,7 @@ interface Issue {
     chipset: string;
     chipsetVer?: string;
     project: { name: string };
-    reporter: { name: string };
+    reporter: { name: string; id?: number };
     assignee?: { name: string };
     updatedAt: string;
 }
@@ -29,9 +30,10 @@ interface Issue {
 interface IssueDetailProps {
     issue: Issue;
     onClose: () => void;
+    currentUserId?: number;
 }
 
-export default function IssueDetail({ issue, onClose }: IssueDetailProps) {
+export default function IssueDetail({ issue, onClose, currentUserId = 1 }: IssueDetailProps) {
     return (
         <div className="fixed inset-y-0 right-0 w-full max-w-2xl bg-white dark:bg-slate-900 shadow-2xl z-50 animate-in slide-in-from-right duration-300 border-l border-slate-200 dark:border-slate-800 flex flex-col">
             {/* Header */}
@@ -91,25 +93,8 @@ export default function IssueDetail({ issue, onClose }: IssueDetailProps) {
                     </div>
                 </div>
 
-                {/* Activity & Comments placeholder */}
-                <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                        <h3 className="text-sm font-bold uppercase tracking-widest text-slate-500">Activity</h3>
-                        <Button variant="ghost" size="sm" className="text-indigo-600 text-xs gap-1 font-bold italic">
-                            <MessageSquare size={14} />
-                            Add Comment
-                        </Button>
-                    </div>
-                    <div className="flex gap-4">
-                        <div className="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 ring-2 ring-white dark:ring-slate-900 shrink-0" />
-                        <div className="flex-1 space-y-2">
-                            <div className="text-xs font-bold">System Generated <span className="text-slate-400 font-normal ml-2">2 hours ago</span></div>
-                            <div className="text-sm text-slate-500 bg-slate-50 dark:bg-slate-800/40 p-3 rounded-lg rounded-tl-none border border-slate-100 dark:border-slate-800">
-                                Issue created and assigned to triage team.
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {/* Comments Section */}
+                <CommentSection issueId={issue.id} currentUserId={currentUserId} />
             </div>
 
             {/* Footer Actions */}
