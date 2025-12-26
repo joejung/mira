@@ -1,0 +1,73 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  engineType = "library"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  name      String?
+  reports   Issue[]  @relation("Reporter")
+  assignees Issue[]  @relation("Assignee")
+  role      Role     @default(USER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Project {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String?
+  key         String   @unique
+  issues      Issue[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Issue {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String?
+  status      Status   @default(OPEN)
+  priority    Priority @default(MEDIUM)
+  projectId   Int
+  project     Project  @relation(fields: [projectId], references: [id])
+  reporterId  Int
+  reporter    User     @relation("Reporter", fields: [reporterId], references: [id])
+  assigneeId  Int?
+  assignee    User?    @relation("Assignee", fields: [assigneeId], references: [id])
+  chipset     String?  // Qualcomm SD8 Gen 3, MTK6873, etc.
+  chipsetVer  String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+enum Role {
+  USER
+  ADMIN
+  DEVELOPER
+}
+
+enum Status {
+  OPEN
+  IN_PROGRESS
+  RESOLVED
+  CLOSED
+  REOPENED
+}
+
+enum Priority {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
