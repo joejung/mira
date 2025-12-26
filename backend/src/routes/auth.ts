@@ -1,10 +1,9 @@
 import { Router } from 'express';
-import { PrismaClient } from '@prisma/client';
+import prisma from '../lib/prisma';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
 const router = Router();
-const prisma = new PrismaClient();
 const JWT_SECRET = process.env.JWT_SECRET || 'mira-chipset-secret-key';
 
 // @route   POST /api/auth/register

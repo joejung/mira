@@ -52,8 +52,9 @@ export default function IssueForm({ onClose, onSuccess }: IssueFormProps) {
                 <CardContent className="pt-6">
                     <form onSubmit={handleSubmit} className="space-y-4">
                         <div className="space-y-2">
-                            <label className="text-xs font-bold uppercase text-slate-500">Title</label>
+                            <label htmlFor="title" className="text-xs font-bold uppercase text-slate-500">Title</label>
                             <Input
+                                id="title"
                                 placeholder="Brief summary of the issue"
                                 value={formData.title}
                                 onChange={(e) => setFormData({ ...formData, title: e.target.value })}
@@ -62,8 +63,9 @@ export default function IssueForm({ onClose, onSuccess }: IssueFormProps) {
                         </div>
 
                         <div className="space-y-2">
-                            <label className="text-xs font-bold uppercase text-slate-500">Priority</label>
+                            <label htmlFor="priority" className="text-xs font-bold uppercase text-slate-500">Priority</label>
                             <select
+                                id="priority"
                                 className="w-full h-10 px-3 rounded-md border border-slate-200 dark:border-slate-800 bg-transparent text-sm outline-none"
                                 value={formData.priority}
                                 onChange={(e) => setFormData({ ...formData, priority: e.target.value })}
@@ -76,8 +78,9 @@ export default function IssueForm({ onClose, onSuccess }: IssueFormProps) {
                         </div>
 
                         <div className="space-y-2">
-                            <label className="text-xs font-bold uppercase text-slate-500">Description</label>
+                            <label htmlFor="description" className="text-xs font-bold uppercase text-slate-500">Description</label>
                             <textarea
+                                id="description"
                                 className="w-full min-h-[100px] p-3 rounded-md border border-slate-200 dark:border-slate-800 bg-transparent text-sm focus:ring-2 focus:ring-indigo-500/20 outline-none"
                                 placeholder="Detailed steps to reproduce, expected vs actual behavior..."
                                 value={formData.description}

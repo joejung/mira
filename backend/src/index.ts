@@ -8,7 +8,7 @@ import issueRoutes from './routes/issues';
 import projectRoutes from './routes/projects';
 import authRoutes from './routes/auth';
 
-const app = express();
+export const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(cors());
@@ -22,6 +22,8 @@ app.get('/api/health', (req: Request, res: Response) => {
   res.json({ status: 'ok', message: 'Backend is running' });
 });
 
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+  });
+}

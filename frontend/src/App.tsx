@@ -173,10 +173,10 @@ function NavItem({ icon, label, active = false, onClick }: { icon: React.ReactNo
   return (
     <div
       onClick={onClick}
-      className={`flex items - center gap - 3 px - 3 py - 2.5 rounded - xl cursor - pointer transition - all duration - 200 ${active
-          ? "bg-indigo-600 text-white font-semibold shadow-lg shadow-indigo-200 dark:shadow-none translate-x-1"
-          : "text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/20"
-        } `}
+      className={`flex items-center gap-3 px-3 py-2.5 rounded-xl cursor-pointer transition-all duration-200 ${active
+        ? "bg-indigo-600 text-white font-semibold shadow-lg shadow-indigo-200 dark:shadow-none translate-x-1"
+        : "text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/20"
+        }`}
     >
       {icon}
       <span className="text-sm">{label}</span>
@@ -227,7 +227,7 @@ function ChipsetProgress({ label, value, color }: { label: string, value: number
         <span className="text-slate-500">{value}%</span>
       </div>
       <div className="h-2 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
-        <div className={`h - full ${barColors[color]} rounded - full`} style={{ width: `${value}% ` }} />
+        <div className={`h-full ${barColors[color]} rounded-full`} style={{ width: `${value}%` }} />
       </div>
     </div>
   )

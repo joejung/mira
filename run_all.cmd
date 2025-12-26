@@ -4,8 +4,8 @@ echo Starting MIRA Application (Backend and Frontend)...
 :: Start backend in a new window
 start "MIRA Backend" cmd /c "cd /d %~dp0backend && npm run dev"
 
-:: Start frontend in a new window
-start "MIRA Frontend" cmd /c "cd /d %~dp0frontend && npm run dev"
+:: Start frontend in a new window (clear cache first)
+start "MIRA Frontend" cmd /c "cd /d %~dp0frontend && if exist node_modules\.vite rmdir /s /q node_modules\.vite && npm run dev"
 
 echo Both services are starting in separate windows.
 echo Backend: http://localhost:5000
