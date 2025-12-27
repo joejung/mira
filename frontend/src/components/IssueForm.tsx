@@ -55,7 +55,7 @@ export default function IssueForm({ onClose, onSuccess, initialProjectId, initia
                 <CardContent className="pt-6">
                     <form onSubmit={handleSubmit} className="space-y-4">
                         <div className="space-y-2">
-                            <label htmlFor="title" className="text-xs font-bold uppercase text-slate-500">Title</label>
+                            <label htmlFor="title" className="text-xs font-bold uppercase text-slate-500 dark:text-slate-400">Title</label>
                             <Input
                                 id="title"
                                 placeholder="Brief summary of the issue"
@@ -66,7 +66,7 @@ export default function IssueForm({ onClose, onSuccess, initialProjectId, initia
                         </div>
 
                         <div className="space-y-2">
-                            <label htmlFor="priority" className="text-xs font-bold uppercase text-slate-500">Priority</label>
+                            <label htmlFor="priority" className="text-xs font-bold uppercase text-slate-500 dark:text-slate-400">Priority</label>
                             <select
                                 id="priority"
                                 className="w-full h-10 px-3 rounded-md border border-slate-200 dark:border-slate-800 bg-transparent text-sm outline-none"
@@ -81,7 +81,7 @@ export default function IssueForm({ onClose, onSuccess, initialProjectId, initia
                         </div>
 
                         <div className="space-y-2">
-                            <label htmlFor="description" className="text-xs font-bold uppercase text-slate-500">Description</label>
+                            <label htmlFor="description" className="text-xs font-bold uppercase text-slate-500 dark:text-slate-400">Description</label>
                             <textarea
                                 id="description"
                                 className="w-full min-h-[100px] p-3 rounded-md border border-slate-200 dark:border-slate-800 bg-transparent text-sm focus:ring-2 focus:ring-indigo-500/20 outline-none"

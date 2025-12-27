@@ -14,7 +14,11 @@ import {
   Settings,
   Folder, // Keep Folder as it's used in NavItem
   LogOut,
+  Sun,
+  Moon,
+  Monitor,
 } from "lucide-react";
+import { useTheme } from "@/context/ThemeContext";
 import Dashboard from "@/pages/Dashboard";
 import IssuesPage from "@/pages/Issues";
 import ProjectsPage from "@/pages/Projects";
@@ -24,6 +28,25 @@ import IssueForm from "@/components/IssueForm";
 
 function AppContent() {
   const { activeTab, setActiveTab, user, showCreateIssue, setShowCreateIssue, logout } = useAppContext();
+  const { theme, setTheme } = useTheme();
+
+  const cycleTheme = () => {
+    if (theme === "light") setTheme("dark");
+    else if (theme === "dark") setTheme("system");
+    else setTheme("light");
+  };
+
+  const getThemeIcon = () => {
+    if (theme === "light") return <Sun size={20} />;
+    if (theme === "dark") return <Moon size={20} />;
+    return <Monitor size={20} />;
+  };
+
+  const getThemeLabel = () => {
+    if (theme === "light") return "Light Mode";
+    if (theme === "dark") return "Dark Mode";
+    return "System Theme";
+  };
 
   const handlePlaceholderClick = (feature: string) => {
     alert(`${feature} feature is coming soon!`);
@@ -54,6 +77,7 @@ function AppContent() {
         </nav>
 
         <div className="p-4 border-t border-slate-200 dark:border-slate-800 space-y-1">
+          <NavItem icon={getThemeIcon()} label={getThemeLabel()} onClick={cycleTheme} />
           <NavItem icon={<Settings size={20} />} label="Settings" onClick={() => handlePlaceholderClick("Settings")} />
           <NavItem icon={<LogOut size={20} />} label="Log Out" onClick={logout} />
         </div>

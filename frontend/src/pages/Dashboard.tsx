@@ -218,7 +218,7 @@ export default function Dashboard() {
     }, []);
 
     if (loading) {
-        return <div className="p-8 text-center text-slate-500 animate-pulse">Loading analytics engine...</div>;
+        return <div className="p-8 text-center text-slate-500 dark:text-slate-400 animate-pulse">Loading analytics engine...</div>;
     }
 
     return (
@@ -227,7 +227,7 @@ export default function Dashboard() {
             <div className="flex items-end justify-between">
                 <div>
                     <h1 className="text-3xl font-bold tracking-tight">Executive Dashboard</h1>
-                    <p className="text-slate-500 text-sm mt-1">Real-time command center for chipset development.</p>
+                    <p className="text-slate-500 dark:text-slate-400 text-sm mt-1">Real-time command center for chipset development.</p>
                 </div>
                 <div className="flex gap-3">
                     <Button variant="outline" className="h-9 gap-2" onClick={fetchData}>
@@ -304,7 +304,7 @@ function StatCard({ title, value, icon, trend, color }: any) {
                     </div>
                 </div>
                 <div className="mt-3 flex items-center gap-2 text-xs">
-                     <span className="font-medium text-slate-500">{trend}</span>
+                     <span className="font-medium text-slate-500 dark:text-slate-400">{trend}</span>
                 </div>
             </CardContent>
         </Card>

@@ -72,7 +72,7 @@ export default function ProjectsPage() {
             <div className="flex items-center justify-between">
                 <div>
                     <h1 className="text-3xl font-bold tracking-tight">Projects</h1>
-                    <p className="text-slate-500 text-sm mt-1">Manage and organize your chipset development portfolios.</p>
+                    <p className="text-slate-500 dark:text-slate-400 text-sm mt-1">Manage and organize your chipset development portfolios.</p>
                 </div>
                 <Button 
                     className="gap-2 bg-indigo-600 hover:bg-indigo-700 shadow-md shadow-indigo-200 dark:shadow-none transition-all hover:translate-y-[-1px]"
@@ -138,7 +138,7 @@ export default function ProjectsPage() {
                         <CardContent className="pt-6">
                             <form onSubmit={handleCreateProject} className="space-y-4">
                                 <div className="space-y-2">
-                                    <Label className="text-xs font-bold uppercase text-slate-500">Project Name</Label>
+                                    <Label className="text-xs font-bold uppercase text-slate-500 dark:text-slate-400">Project Name</Label>
                                     <Input
                                         placeholder="e.g. Athena Chipset"
                                         value={newProjectData.name}
@@ -147,7 +147,7 @@ export default function ProjectsPage() {
                                     />
                                 </div>
                                 <div className="space-y-2">
-                                    <Label className="text-xs font-bold uppercase text-slate-500">Project Key</Label>
+                                    <Label className="text-xs font-bold uppercase text-slate-500 dark:text-slate-400">Project Key</Label>
                                     <Input
                                         placeholder="e.g. ATH"
                                         className="font-mono uppercase"
@@ -158,7 +158,7 @@ export default function ProjectsPage() {
                                     />
                                 </div>
                                 <div className="space-y-2">
-                                    <Label className="text-xs font-bold uppercase text-slate-500">Description</Label>
+                                    <Label className="text-xs font-bold uppercase text-slate-500 dark:text-slate-400">Description</Label>
                                     <Input
                                         placeholder="Brief description..."
                                         value={newProjectData.description}

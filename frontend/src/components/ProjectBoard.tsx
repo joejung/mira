@@ -44,7 +44,7 @@ const STATUS_COLUMNS = [
     { id: 'OPEN', label: 'To Do', color: 'bg-slate-100 text-slate-700' },
     { id: 'IN_PROGRESS', label: 'In Progress', color: 'bg-blue-100 text-blue-700' },
     { id: 'RESOLVED', label: 'Resolved', color: 'bg-green-100 text-green-700' },
-    { id: 'CLOSED', label: 'Done', color: 'bg-slate-200 text-slate-500' }
+    { id: 'CLOSED', label: 'Done', color: 'bg-slate-200 text-slate-500 dark:text-slate-400' }
 ];
 
 export default function ProjectBoard({ projectId, projectName, onBack }: ProjectBoardProps) {
@@ -133,7 +133,7 @@ export default function ProjectBoard({ projectId, projectName, onBack }: Project
     };
 
     if (loading) {
-        return <div className="p-8 text-center text-slate-500">Loading board...</div>;
+        return <div className="p-8 text-center text-slate-500 dark:text-slate-400">Loading board...</div>;
     }
 
     return (
@@ -286,7 +286,7 @@ function KanbanCard({ issue, index, onClick }: { issue: Issue, index: number, on
                             {issue.title}
                         </h4>
 
-                        <div className="flex items-center gap-2 text-[10px] text-slate-500 font-medium">
+                        <div className="flex items-center gap-2 text-[10px] text-slate-500 dark:text-slate-400 font-medium">
                             <div className="flex items-center gap-1 bg-slate-50 dark:bg-slate-900 px-1.5 py-0.5 rounded border border-slate-100 dark:border-slate-800">
                                 <AlertCircle size={10} />
                                 <span>{issue.chipset}</span>

@@ -125,9 +125,9 @@ export default function CommentSection({ issueId, currentUserId }: CommentSectio
 
             {/* Comments List */}
             {loading ? (
-                <div className="text-center py-4 text-slate-500">Loading comments...</div>
+                <div className="text-center py-4 text-slate-500 dark:text-slate-400">Loading comments...</div>
             ) : comments.length === 0 ? (
-                <div className="text-center py-8 text-slate-500">
+                <div className="text-center py-8 text-slate-500 dark:text-slate-400">
                     <MessageCircle size={32} className="mx-auto mb-2 opacity-50" />
                     <p>No comments yet. Be the first to comment!</p>
                 </div>
@@ -147,7 +147,7 @@ export default function CommentSection({ issueId, currentUserId }: CommentSectio
                                         <span className="font-medium text-sm">
                                             {comment.author.name || comment.author.email}
                                         </span>
-                                        <span className="text-xs text-slate-500">
+                                        <span className="text-xs text-slate-500 dark:text-slate-400">
                                             {formatDate(comment.createdAt)}
                                         </span>
                                     </div>

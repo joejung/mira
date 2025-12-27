@@ -113,7 +113,7 @@ export default function LoginPage() {
                         </Button>
                     </form>
 
-                    <div className="mt-6 text-center text-sm text-slate-500">
+                    <div className="mt-6 text-center text-sm text-slate-500 dark:text-slate-400">
                         Don't have an account? <Button variant="link" className="px-1 text-indigo-600 font-semibold">Contact Administrator</Button>
                     </div>
                 </CardContent>

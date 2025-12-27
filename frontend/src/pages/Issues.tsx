@@ -44,7 +44,7 @@ export default function IssuesPage() {
             <div className="flex items-center justify-between font-sans">
                 <div>
                     <h1 className="text-3xl font-bold tracking-tight">Issues</h1>
-                    <p className="text-slate-500 text-sm mt-1">Manage and track technical issues across your projects.</p>
+                    <p className="text-slate-500 dark:text-slate-400 text-sm mt-1">Manage and track technical issues across your projects.</p>
                 </div>
                 <Button
                     onClick={() => setShowForm(true)}
@@ -67,7 +67,7 @@ export default function IssuesPage() {
             </div>
 
             <Card className="border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden text-sm bg-white/50 dark:bg-slate-900/50 backdrop-blur-md">
-                <div className="grid grid-cols-12 px-6 py-4 bg-slate-50/50 dark:bg-slate-950/50 border-b border-slate-200 dark:border-slate-800 font-semibold text-slate-500 uppercase tracking-wider text-[11px]">
+                <div className="grid grid-cols-12 px-6 py-4 bg-slate-50/50 dark:bg-slate-950/50 border-b border-slate-200 dark:border-slate-800 font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider text-[11px]">
                     <div className="col-span-5">Issue Title</div>
                     <div className="col-span-2 text-center">Status</div>
                     <div className="col-span-2 text-center">Priority</div>
