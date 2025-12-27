@@ -18,6 +18,7 @@ import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
 import type { DropResult } from '@hello-pangea/dnd';
 import IssueDetail from './IssueDetail';
 import IssueForm from './IssueForm';
+import { API_BASE_URL } from "@/config";
 
 interface Issue {
     id: number;
@@ -72,7 +73,7 @@ export default function ProjectBoard({ projectId, projectName, onBack }: Project
 
     const fetchProjectIssues = async () => {
         try {
-            const response = await fetch(`http://localhost:5000/api/issues?projectId=${projectId}`);
+            const response = await fetch(`${API_BASE_URL}/issues?projectId=${projectId}`);
             if (response.ok) {
                 const data = await response.json();
                 setIssues(data);
@@ -103,7 +104,7 @@ export default function ProjectBoard({ projectId, projectName, onBack }: Project
         ));
 
         try {
-            const response = await fetch(`http://localhost:5000/api/issues/${issueId}/status`, {
+            const response = await fetch(`${API_BASE_URL}/issues/${issueId}/status`, {
                 method: 'PATCH',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ status: newStatus })

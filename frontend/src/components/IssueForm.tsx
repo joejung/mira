@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Save, X } from "lucide-react";
 import ChipsetSelector from "./ChipsetSelector";
+import { API_BASE_URL } from "@/config";
 
 interface IssueFormProps {
     onClose: () => void;
@@ -28,7 +29,7 @@ export default function IssueForm({ onClose, onSuccess, initialProjectId, initia
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            const response = await fetch("http://localhost:5000/api/issues", {
+            const response = await fetch(`${API_BASE_URL}/issues`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(formData),

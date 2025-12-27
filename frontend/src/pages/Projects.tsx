@@ -6,6 +6,7 @@ import { Folder, MoreVertical, Plus, X } from "lucide-react";
 import ProjectBoard from "@/components/ProjectBoard";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { API_BASE_URL } from "@/config";
 
 interface Project {
     id: number;
@@ -25,7 +26,7 @@ export default function ProjectsPage() {
     const handleCreateProject = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            const response = await fetch('http://localhost:5000/api/projects', {
+            const response = await fetch(`${API_BASE_URL}/projects`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(newProjectData)
@@ -44,7 +45,7 @@ export default function ProjectsPage() {
     useEffect(() => {
         const fetchProjects = async () => {
             try {
-                const response = await fetch('http://localhost:5000/api/projects');
+                const response = await fetch(`${API_BASE_URL}/projects`);
                 if (response.ok) {
                     const data = await response.json();
                     setProjects(data);

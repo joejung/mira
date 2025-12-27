@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
+import { API_BASE_URL } from "@/config";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Search, Filter, Plus, ChevronRight, Cpu } from "lucide-react";
@@ -23,7 +24,7 @@ export default function IssuesPage() {
 
     const fetchIssues = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/issues');
+            const response = await fetch(`${API_BASE_URL}/issues`);
             if (!response.ok) throw new Error('Failed to fetch issues');
             const data = await response.json();
             setIssues(data);

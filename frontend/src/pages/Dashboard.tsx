@@ -27,6 +27,7 @@ import {
 } from "@/components/dashboard/DashboardTables";
 
 import { Card, CardContent } from "@/components/ui/card";
+import { API_BASE_URL } from "@/config";
 
 interface Issue {
     id: number;
@@ -72,7 +73,7 @@ export default function Dashboard() {
     const fetchData = async () => {
         setLoading(true);
         try {
-            const response = await fetch('http://localhost:5000/api/issues');
+            const response = await fetch(`${API_BASE_URL}/issues`);
             if (!response.ok) throw new Error('Failed to fetch data');
             
             const issues: Issue[] = await response.json();

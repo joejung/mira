@@ -4,6 +4,9 @@ import { defineConfig } from "vite"
 import { fileURLToPath } from "url"
 
 export default defineConfig({
+  server: {
+    host: true,
+  },
   plugins: [
     react(),
     tailwindcss(),

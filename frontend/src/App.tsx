@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
+import { ThemeProvider } from "@/context/ThemeContext";
 
 import {
   LayoutDashboard,
@@ -12,6 +13,7 @@ import {
   Bell,
   Settings,
   Folder, // Keep Folder as it's used in NavItem
+  LogOut,
 } from "lucide-react";
 import Dashboard from "@/pages/Dashboard";
 import IssuesPage from "@/pages/Issues";
@@ -21,7 +23,7 @@ import { AppProvider, useAppContext } from "@/context/AppContext";
 import IssueForm from "@/components/IssueForm";
 
 function AppContent() {
-  const { activeTab, setActiveTab, user, showCreateIssue, setShowCreateIssue } = useAppContext();
+  const { activeTab, setActiveTab, user, showCreateIssue, setShowCreateIssue, logout } = useAppContext();
 
   const handlePlaceholderClick = (feature: string) => {
     alert(`${feature} feature is coming soon!`);
@@ -51,8 +53,9 @@ function AppContent() {
           <NavItem icon={<BarChart3 size={20} />} label="Analytics" onClick={() => handlePlaceholderClick("Analytics")} />
         </nav>
 
-        <div className="p-4 border-t border-slate-200 dark:border-slate-800">
+        <div className="p-4 border-t border-slate-200 dark:border-slate-800 space-y-1">
           <NavItem icon={<Settings size={20} />} label="Settings" onClick={() => handlePlaceholderClick("Settings")} />
+          <NavItem icon={<LogOut size={20} />} label="Log Out" onClick={logout} />
         </div>
       </aside>
 
@@ -122,7 +125,9 @@ function AppContent() {
 export default function App() {
   return (
     <AppProvider>
-      <AppContent />
+      <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
+        <AppContent />
+      </ThemeProvider>
     </AppProvider>
   );
 }

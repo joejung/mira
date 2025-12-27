@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { MessageCircle, Send, Trash2, User } from 'lucide-react';
+import { API_BASE_URL } from "@/config";
 
 interface Comment {
     id: number;
@@ -29,7 +30,7 @@ export default function CommentSection({ issueId, currentUserId }: CommentSectio
 
     const fetchComments = async () => {
         try {
-            const response = await fetch(`http://localhost:5000/api/comments/issue/${issueId}`);
+            const response = await fetch(`${API_BASE_URL}/comments/issue/${issueId}`);
             if (response.ok) {
                 const data = await response.json();
                 setComments(data);
@@ -46,7 +47,7 @@ export default function CommentSection({ issueId, currentUserId }: CommentSectio
         if (!newComment.trim()) return;
 
         try {
-            const response = await fetch('http://localhost:5000/api/comments', {
+            const response = await fetch(`${API_BASE_URL}/comments`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -67,7 +68,7 @@ export default function CommentSection({ issueId, currentUserId }: CommentSectio
 
     const handleDelete = async (commentId: number) => {
         try {
-            const response = await fetch(`http://localhost:5000/api/comments/${commentId}`, {
+            const response = await fetch(`${API_BASE_URL}/comments/${commentId}`, {
                 method: 'DELETE'
             });
             if (response.ok) {
